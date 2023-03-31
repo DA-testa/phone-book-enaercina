@@ -1,4 +1,4 @@
-# python3...
+# Ena-Daniela.Ercina 2.grupa 221RDB369
 
 class Query:
     def __init__(self, query):
