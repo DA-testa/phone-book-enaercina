@@ -1,21 +1,21 @@
 class Phonebook:
     def __init__(self):
-        self.contacts = []
+        self.contacts = {}
 
     def add_contact(self, number, name):
-        self.contacts.append((number, name))
+        self.contacts[number] = name
 
     def delete_contact(self, number):
-        for i in range(len(self.contacts)):
-            if self.contacts[i][0] == number:
-                del self.contacts[i]
-                break
+        try:
+            del self.contacts[number]
+        except KeyError:
+            pass
 
     def find_contact(self, number):
-        for contact in self.contacts:
-            if contact[0] == number:
-                return contact[1]
-        return 'not found'
+        try:
+            return self.contacts[number]
+        except KeyError:
+            return 'not found'
 
 def read_queries():
     n = int(input())
@@ -41,7 +41,7 @@ def process_queries(queries):
     return result
 
 def write_responses(result):
-    print('\n'.join(str(r) for r in result))
+    print('\n'.join(result))
 
 if __name__ == '__main__':
     queries = read_queries()
