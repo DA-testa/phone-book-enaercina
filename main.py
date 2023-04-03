@@ -1,17 +1,21 @@
 class Phonebook:
     def __init__(self):
-        self.contacts = {}
+        self.contacts = []
 
     def add_contact(self, number, name):
-        self.contacts[number] = name
+        self.contacts.append((number, name))
 
     def delete_contact(self, number):
-        if number in self.contacts:
-            del self.contacts[number]
+        for i in range(len(self.contacts)):
+            if self.contacts[i][0] == number:
+                del self.contacts[i]
+                break
 
     def find_contact(self, number):
-        return self.contacts.get(number, 'not found')
-
+        for contact in self.contacts:
+            if contact[0] == number:
+                return contact[1]
+        return 'not found'
 
 def read_queries():
     n = int(input())
@@ -20,7 +24,6 @@ def read_queries():
         query = input().split()
         queries.append(query)
     return queries
-
 
 def process_queries(queries):
     phonebook = Phonebook()
@@ -37,10 +40,8 @@ def process_queries(queries):
             result.append(phonebook.find_contact(query_number))
     return result
 
-
 def write_responses(result):
-    print('\n'.join(result))
-
+    print('\n'.join(str(r) for r in result))
 
 if __name__ == '__main__':
     queries = read_queries()
