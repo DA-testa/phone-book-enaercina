@@ -1,19 +1,20 @@
-class Phonebook:
+# Ena Daniela Ercina 2.grupa. 221RDB369
+class AddressBook:
     def __init__(self):
-        self.contacts = {}
+        self.addresses = {}
 
-    def add_contact(self, number, name):
-        self.contacts[number] = name
+    def add_address(self, number, name):
+        self.addresses[number] = name
 
-    def delete_contact(self, number):
+    def delete_address(self, number):
         try:
-            del self.contacts[number]
+            del self.addresses[number]
         except KeyError:
             pass
 
-    def find_contact(self, number):
+    def find_address(self, number):
         try:
-            return self.contacts[number]
+            return self.addresses[number]
         except KeyError:
             return 'not found'
 
@@ -26,18 +27,18 @@ def read_queries():
     return queries
 
 def process_queries(queries):
-    phonebook = Phonebook()
+    address_book = AddressBook()
     result = []
     for query in queries:
         query_type = query[0]
         query_number = int(query[1])
         if query_type == 'add':
             query_name = query[2]
-            phonebook.add_contact(query_number, query_name)
+            address_book.add_address(query_number, query_name)
         elif query_type == 'del':
-            phonebook.delete_contact(query_number)
+            address_book.delete_address(query_number)
         elif query_type == 'find':
-            result.append(phonebook.find_contact(query_number))
+            result.append(address_book.find_address(query_number))
     return result
 
 def write_responses(result):
